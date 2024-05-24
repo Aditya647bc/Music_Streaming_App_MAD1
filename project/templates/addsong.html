@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+{% block title %} Home{% endblock title %}
+{% block body %}
+
+<div style="display: flex;">
+    <div class="container" style="text-align: center; align-items: center; width: 350px;">
+        <h2>Add Song</h2>
+        <form action="/addsong/{{album.Album_id}}" method="POST" enctype="multipart/form-data">
+          <div class="mb-3">
+            <label for="songname" class="form-label">Song Name</label>
+            <input type="text" class="form-control" name="name" id="name" aria-describedby="emailHelp">
+          </div>
+          <div class="mb-3">
+            <label for="lyrics" class="form-label">Lyrics</label>
+            <input type="text" class="form-control" name="lyrics" id="lyrics">
+          </div>
+          <div class="mb-3">
+            <label for="artist" class="form-label">Artist</label>
+            <input type="text" class="form-control" name="artist" id="artist">
+          </div>
+          <div class="mb-3">
+            <label for="venuecapacity" class="form-label">Genre</label>
+            <input type="text" class="form-control" name="genre" id="genre">
+          </div>
+          <div>
+            <label for="song" class="form-label">Select an MP3 File</label>
+            <input type="file" name="songmp3" accept=".mp3" required class="form-control">
+        </div class="mb-3">
+        <br>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+</div>
+
+<div class="container" style="width: 850px;">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">SNo</th>
+          <th scope="col">Song Name</th>
+          <th scope="col">Genre</th>
+          <th scope="col">Artist</th>
+          <th scope="col">Rating</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for song in songs %}
+        <tr>
+          <th scope="row">{{loop.index}}</th>
+          <td>{{song.Name}} </td>
+          <td>{{song.Genre}}</td>
+          <td>{{song.Artist}}</td>
+          <td>{{song.Rating}}</td>
+          <td>
+            <a href="/updatesong/{{song.Song_id}}" class="btn btn-primary btn-sm mx-1" style="text-decoration: none; margin-right: 20px;">update</a>
+            <a href="/deletesong/{{song.Song_id}}" class="btn btn-primary btn-sm mx-1" style="text-decoration: none; margin-right: 20px;">delete</a>
+            <a class="btn btn-primary btn-sm mx-1" data-bs-toggle="modal" data-bs-target="#lyricsModal{{song.Song_id}}">View Lyrics</a>
+            <div class="modal fade" id="lyricsModal{{song.Song_id}}" tabindex="-1" aria-labelledby="lyricsModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="lyricsModalLabel">Lyrics</h5>
+                    </div>
+                    <div class="modal-body">
+                      <p id="lyricsText">{{song.Lyrics}}</p>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+          </td>
+        </tr>   
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+{% endblock body %}

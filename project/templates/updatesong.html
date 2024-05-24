@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block title %} Home{% endblock title %}
+{% block body %}
+
+<div style="display: flex;">
+  <div class="container" style="text-align: center; align-items: center; margin-top: 50px;  width: 350px;">
+    <div class="container" style="text-align: center; align-items: center; margin-top: 50px;  width: 350px;">
+        <div><h3>Update Album</h3></div><br><br>
+        <form action="/updatesong/{{song.Song_id}}" method="POST">
+          <div class="mb-3">
+            <label for="songname" class="form-label">Song Name</label>
+            <input type="text" class="form-control" name="name" id="name" value="{{song.Name}}">
+          </div>
+          <div class="mb-3">
+            <label for="lyrics" class="form-label">Lyrics</label>
+            <input type="text" class="form-control" name="lyrics" id="lyrics" value="{{song.Lyrics}}">
+          </div>
+          <div class="mb-3">
+            <label for="artist" class="form-label">Artist</label>
+            <input type="text" class="form-control" name="artist" id="artist" value="{{song.Artist}}">
+          </div>
+          <div class="mb-3">
+            <label for="venuecapacity" class="form-label">Genre</label>
+            <input type="text" class="form-control" name="genre" id="genre" value="{{song.Genre}}">
+          </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+    </div>
+</div>
+</div>
+
+{% endblock body %}

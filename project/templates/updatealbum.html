@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block title %} Home{% endblock title %}
+{% block body %}
+
+<div style="display: flex;">
+  <div class="container" style="text-align: center; align-items: center; margin-top: 50px;  width: 350px;">
+    <div class="container" style="text-align: center; align-items: center; margin-top: 50px;  width: 350px;">
+        <div><h3>Update Album</h3></div><br><br>
+        <form action="/updatealbum/{{album.Album_id}}" method="POST">
+            <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Name</label>
+                <input type="text" class="form-control" id="exampleInputPassword1" name="albumname" value="{{album.Name}}">
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Aritst</label>
+                <input type="text" class="form-control" id="exampleInputPassword1" name="artist" value="{{album.Artist}}">
+              </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+    </div>
+</div>
+</div>
+
+{% endblock body %}

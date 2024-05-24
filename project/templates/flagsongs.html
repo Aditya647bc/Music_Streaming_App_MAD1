@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% block title %} Home{% endblock title %} 
+{% block body %}
+<br>
+<div class="col-9 my-4" style="text-align: center; margin-left: 170px;">
+    <h2>All Songs</h2>
+    <br>
+    <table class="table table-light">
+      <thead>
+        <tr>
+          <th scope="col">Genre</th>
+          <th scope="col">Song ID</th>
+          <th scope="col">Song Name</th>
+          <th scope="col">Artist</th>
+          <th scope="col">Rating</th>
+          <th scope="col">Duration</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for a in songs %}
+        <tr><td class="table-primary"><strong>{{a.genre}}</strong></td></tr>
+        {% for song in a.songs %}
+        <tr>
+          <td></td>
+          <td>{{song.Song_id}} </td>
+          <td>{{song.Name}}</td>
+          <td>{{song.Artist}}</td>
+          <td>{{song.Rating}}</td>
+          <td>
+            <a href="/deletesong_byadmin/{{song.Song_id}}" type="button" class="btn btn-primary btn-sm mx-1">Delete</button>
+            <a class="btn btn-primary btn-sm mx-1" data-bs-toggle="modal" data-bs-target="#lyricsModal{{song.Song_id}}">View Lyrics</a>
+
+            <div class="modal fade" id="lyricsModal{{song.Song_id}}" tabindex="-1" aria-labelledby="lyricsModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="lyricsModalLabel">Lyrics </h5>
+                </div>
+                <div class="modal-body">
+                    <p id="lyricsText">{{song.Lyrics}} </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+                </div>
+                </div>
+            </div>
+                  </div>
+          </td>
+        </tr>
+        {% endfor %}
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+{% endblock body %}

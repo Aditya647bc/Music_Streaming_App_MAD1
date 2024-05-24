@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% block title %} Home{% endblock title %}
+{% block body %}
+
+<div  style="display: flex; margin-left: 420px;">
+  <div>
+      <div class="card" style="width: 200px; margin-right: 20px;">
+          <div class="card-body">
+            <h5>Total Songs</h5>
+            <h3>{{song_count}}</h3>
+          </div>
+        </div>
+  </div><br>
+  <div>
+      <div class="card" style="width: 200px; margin-right: 20px;">
+          <div class="card-body">
+              <h5>Average Ratings</h5>
+              <h3>{{avg}} </h3>
+          </div>
+        </div>
+  </div><br>
+  <div>
+      <div class="card" style="width: 200px; margin-right: 20px;">
+          <div class="card-body">
+              <h5>Total Albums</h5>
+              <h3>{{albums | length}}</h3>
+          </div>
+        </div>
+  </div><br>
+</div><br>
+
+<div style="display: flex;">
+    <div class="container" style="text-align: center; align-items: center; width: 350px;">
+        <div><h3>Create Album</h3></div><br><br>
+        <form action="/addalbum" method="POST">
+            <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Name</label>
+                <input type="text" class="form-control" id="exampleInputPassword1" name="albumname">
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Aritst</label>
+                <input type="text" class="form-control" id="exampleInputPassword1" name="artist">
+              </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+    </div>
+
+  <div class="container" style="width: 850px;">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">SNo</th>
+          <th scope="col">Album ID</th>
+          <th scope="col">Album Name</th>
+          <th scope="col">Artist</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for album in albums %}
+        <tr>
+          <th scope="row">{{loop.index}}</th>
+          <td>{{album.Album_id}} </td>
+          <td>{{album.Name}}</td>
+          <td>{{album.Artist}}</td>
+          <td>
+            <a href="/updatealbum/{{album.Album_id}}" class="btn btn-primary btn-sm mx-1" style="text-decoration: none; margin-right: 20px;">update</a>
+            <a href="/deletealbum/{{album.Album_id}}" class="btn btn-primary btn-sm mx-1" style="text-decoration: none; margin-right: 20px;">delete</a>
+                <a href="/addsong/{{album.Album_id}}" type="button" class="btn btn-primary btn-sm mx-1">Add song</a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+{% endblock body %}

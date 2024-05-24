@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% block title %} Home{% endblock title %}
+{% block body %}
+<div class="col-6" style="margin-left: 400px;">
+    <h3>{{p.Name}} <a class="btn btn-primary btn-sm mx-1" href="/deleteplaylist/{{p.Playlist_id}}/whole/{{p.Playlist_id}}">Delete</a></h3> <br>
+    {% for song in songs %}
+    <div style="display: flex;" class="col-3">
+      <div class="container">
+        <div class="row">
+          <div class="col">
+            <strong>{{song.Name}}</strong>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+           <strong> {{song.Artist}}</strong>
+          </div>
+        </div>
+         <div class="row">
+          <div class="col">
+            <strong>{{song.Genre}}</strong>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+           <strong> {{song.Rating}} <img style="width: 20px;" src="/static/images/star.png" alt=""></strong>
+          </div>
+        </div>
+      </div>
+
+      <div style="display: flex;" class="col-4">
+       <div> <audio controls>
+        <source src="{{ url_for('static', filename= song.Song_path) }}" type="audio/mp3">
+    </audio>
+  </div>
+     <div>
+      <a class="btn btn-primary btn-sm mx-1" data-bs-toggle="modal" data-bs-target="#lyricsModal{{song.Song_id}}">lyrics</a>         
+     </div>
+
+
+     <div class="modal fade" id="lyricsModal{{song.Song_id}}" tabindex="-1" aria-labelledby="lyricsModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="lyricsModalLabel">Lyrics</h5>
+          </div>
+          <div class="modal-body">
+            <p id="lyricsText">{{song.Lyrics}}</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+     <div>
+      <a class="btn btn-primary btn-sm mx-1" href="/deleteplaylist/{{p.Playlist_id}}/song/{{song.Song_id}}">remove</a>         
+     </div>
+
+     <div>
+      <div class="dropdown">
+        <a class="btn btn-secondary dropdown-toggle btn-sm mx-1" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Rate
+        </a>
+      
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item" href="/rate/1/{{song.Song_id}}">1</a></li>
+          <li><a class="dropdown-item" href="/rate/2/{{song.Song_id}}">2</a></li>
+          <li><a class="dropdown-item" href="/rate/3/{{song.Song_id}}">3</a></li>
+          <li><a class="dropdown-item" href="/rate/4/{{song.Song_id}}">4</a></li>
+          <li><a class="dropdown-item" href="/rate/5/{{song.Song_id}}">5</a></li>
+        </ul>
+      </div>
+     </div>
+      </div>
+    </div>
+    <br>
+    {% endfor %}
+  </div>
+
+  {% endblock body %}

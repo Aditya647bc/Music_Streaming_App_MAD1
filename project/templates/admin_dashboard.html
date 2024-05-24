@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% block title %} Home{% endblock title %}
+{% block body %}
+
+<div class="container" style="text-align: center; align-items: center;">
+    <h2>Admin Dashboard</h2>
+</div><br>
+    <div  style="display: flex; margin-left: 370px;">
+        <div>
+            <div class="card" style="width: 150px; margin-right: 20px;">
+                <div class="card-body">
+                  <h5>General Users </h5>
+                  <h3>{{user_count}}</h3>
+                </div>
+              </div>
+        </div><br>
+        <div>
+            <div class="card" style="width: 150px; margin-right: 20px;">
+                <div class="card-body">
+                    <h5>Creator</h5>
+                    <h3>{{creator_count}} </h3>
+                </div>
+              </div>
+        </div><br>
+        <div>
+            <div class="card" style="width: 170px; margin-right: 20px;">
+                <div class="card-body">
+                    <h5>Songs</h5>
+                    <h3>{{song_count}} <a href="/flagsongs" type="button" class="btn btn-primary btn-sm mx-1"> Flag Songs</a></h3>
+                </div>
+              </div>
+        </div><br>
+        <div>
+            <div class="card" style="width: 150px; margin-right: 20px;">
+                <div class="card-body">
+                    <h5>Albums</h5>
+                    <h3>{{album_count}} </h3>
+                </div>
+              </div>
+        </div><br>
+        <div>
+            <div class="card" style="width: 150px;">
+                <div class="card-body">
+                    <h5>Genres</h5>
+                    <h3>{{genre_count}}</h3>
+                </div>
+              </div>
+        </div>
+
+    </div>
+<div style="display: flex; margin-left: 220px;">
+    <div>
+        <img src="data:image/png;base64,{{ graph_html }}" alt="Songs and Ratings" style="width: 600px;">
+    </div>
+
+    <div>
+        <img src="data:image/png;base64,{{ pie_chart_html }}" alt="User Status Distribution" style="width: 400px;">
+    </div>
+</div>
+{% endblock body %}
